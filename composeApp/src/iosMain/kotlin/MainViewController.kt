@@ -1,3 +1,11 @@
-import androidx.compose.ui.window.ComposeUIViewController
+@file:OptIn(ExperimentalForeignApi::class)
 
-fun MainViewController() = ComposeUIViewController { App() }
+import androidx.compose.ui.window.ComposeUIViewController
+import kotlinx.cinterop.ExperimentalForeignApi
+import org.example.project.greeting.HelloWorld
+
+fun MainViewController() = ComposeUIViewController {
+    val klibTest = HelloWorld.helloWorld()
+
+    App()
+}
