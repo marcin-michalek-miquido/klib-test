@@ -6,7 +6,6 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
-    id("io.github.ttypic.swiftklib") version "0.6.3"
 }
 
 kotlin {
@@ -26,18 +25,9 @@ kotlin {
             baseName = "ComposeApp"
             isStatic = true
         }
-
-        iosTarget.compilations {
-            val main by getting {
-                cinterops {
-                    create("HelloSwift")
-                }
-            }
-        }
     }
 
     sourceSets {
-
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
@@ -50,13 +40,9 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
         }
-    }
-}
-
-swiftklib {
-    create("HelloSwift") {
-        path = file("native/HelloSwift")
-        packageName("org.example.project.greeting")
+        iosMain.dependencies {
+            implementation(project(":library:hellolibrary"))
+        }
     }
 }
 
